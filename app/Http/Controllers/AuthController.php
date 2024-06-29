@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +50,7 @@ class AuthController extends Controller
             $jwt = JWT::encode($payload, env('JWT_SECRET_KEY'), 'HS256');
 
             // Kirim token ke user
-            return response()->json(['messages' => 'Token Berhasil Dibuat', 'token' => 'Bearer: '. $jwt], 200);
+            return response()->json(['messages' => 'Token Berhasil Dibuat', 'token' => $jwt], 200);
         }
         return response()->json(['messages' => 'Account Tidak Ditemukan.'], 422);
     }
@@ -103,5 +104,5 @@ class AuthController extends Controller
         ]);
         
         return response()->json(['messages' => 'Register Berhasil'], 201);
-    } 
+    }
 }

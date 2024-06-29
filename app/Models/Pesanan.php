@@ -21,27 +21,4 @@ class Pesanan extends Model
     public function layanan(){
         return $this->belongsTo(Layanan::class, 'id_layanan', 'id');
     }
-
-    protected static function booted(){
-        // Event listener untuk menambahkan pesanan baru ke laporan
-        static::created(function ($pesanan) {
-            $tanggal = $pesanan->tanggal_pemesanan;
-            $laporan = Laporan::where('tanggal_transaksi', $tanggal)->first();
-        
-            if (!$laporan) {
-                // Jika belum ada laporan untuk tanggal ini, buat laporan baru
-                $laporan = Laporan::create([
-                    'tanggal_transaksi' => $tanggal,
-                    'jumlah_pesanan' => $pesanan->jumlah,
-                    'total_pendapatan' => $pesanan->total_harga,
-                ]);
-            } else {
-                // Jika sudah ada laporan, update jumlah pesanan dan pendapatan
-                $laporan->jumlah_pesanan += $pesanan->jumlah;
-                $laporan->total_pendapatan += $pesanan->total_harga;
-                $laporan->save();
-            }
-        });
-        
-    }
 }

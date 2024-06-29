@@ -11,6 +11,30 @@ use Carbon\Carbon;
 
 class PesananController extends Controller
 {   
+    // Menampilkan semua data pesanan dengan relasi pelanggan dan layanan
+    public function index()
+    {
+        $pesanan = Pesanan::with(['pelanggan', 'layanan'])->get();
+
+        return response()->json($pesanan);
+    }
+
+    // Melihat data pesanan
+    public function show(){
+        $pesanan = Pesanan::all();
+
+        return response()->json($pesanan, 200);
+    }
+
+    // Menampilkan data pesanan by id
+    public function showById($id){
+        $pesanan = Pesanan::find($id);
+        if (!$pesanan) {
+            return response()->json(['message' => 'Pesanan tidak ditemukan'], 404);
+        }
+        return response()->json($pesanan, 200);
+    }
+    
     // Membuat data pesanan
     public function create(Request $request){
         $validator = Validator::make($request->all(), [
@@ -59,24 +83,19 @@ class PesananController extends Controller
         return response()->json(['message' => 'Pesanan berhasil dibuat', 'pesanan' => $pesanan], 201);
     }
 
+    // Mengubah Status dari Proses ke Selesai
+    public function updateStatus($id){
+        $pesanan = Pesanan::find($id);
 
-    public function totalHarga(Request $request){
-        $validator = Validator::make($request->all(), [
-            'id_layanan' => 'required|exists:layanan,id',
-            'jumlah' => 'required|integer|min:1'
-        ]);
-
-        // Jika inputan salah
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 400);
+        if (!$pesanan) {
+            return response()->json(['message' => 'Data Pesanan Tidak Ditemukan.'], 404);
         }
 
-        $validated = $validator->validated();
+        $pesanan->status = 'selesai';
 
-        $layanan = Layanan::find($validated['id_layanan']);
+        $pesanan->save();
 
-        $total_harga = $layanan->harga * $validated['jumlah'];
-
-        return response()->json(['total_harga' => $total_harga], 200);
+        return response()->json(['message' => 'Status Pesanan Berhasil Diubah Menjadi Selesai.'], 200);
     }
+
 }

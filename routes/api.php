@@ -32,13 +32,18 @@ Route::middleware(['jwt-auth'])->group(function(){
     Route::delete('/layanan/{id}', [LayananController::class, 'delete']);
 
     //Routes Pesanan
+    Route::get('/pesanan', [PesananController::class, 'index']);
     Route::get('/pesanans', [PesananController::class, 'show']);
+    Route::get('/pesanans/{id}', [PesananController::class, 'showById']);
     Route::post('/pesanan', [PesananController::class, 'create']);
     Route::put('/pesanan/{id}', [PesananController::class, 'update']);
     Route::delete('/pesanan/{id}', [PesananController::class, 'delete']);
+    Route::patch('/pesanan/status/{id}', [PesananController::class, 'updateStatus']);
 
     //Routes Laporan
-    Route::get('/laporan', [LaporanController::class, 'show']);
+    Route::get('/laporans', [LaporanController::class, 'show']);
+    Route::post('/laporans/tanggal', [LaporanController::class, 'showByTanggal']);
+    Route::post('/laporan', [LaporanController::class, 'createLaporan']);
 });
 
 Route::middleware(['jwt-auth', 'role-owner'])->group(function(){

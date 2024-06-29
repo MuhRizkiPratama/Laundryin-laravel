@@ -8,25 +8,25 @@ use App\Models\Layanan;
 
 class LayananController extends Controller
 {   
-    // Menampilkan Data
+    // Menampilkan semua data layanan
     public function show(){
         $layanan = Layanan::all();
 
-        return response()->json($layanan)->setStatusCode(200);
+        return response()->json($layanan, 200);
     }
 
-    public function showById($id)
-    {
+    // Menampilkan data layanan by id
+    public function showById($id){
         $layanan = Layanan::find($id);
         if (!$layanan) {
             return response()->json(['message' => 'Layanan tidak ditemukan'], 404);
         }
-        return response()->json($layanan)->setStatusCode(200);
+        return response()->json($layanan, 200);
     }
 
-    //Menambahkan Data
+    //Menambahkan data
     public function create(request $request){
-        // Validasi Inputan
+        // Validasi inputan
         $validator = Validator::make($request->all(),[
             'nama' => 'required|string|max:100',
             'deskripsi' => 'required|string|max:255',
@@ -37,7 +37,7 @@ class LayananController extends Controller
 
         // Jika inputan salah
         if($validator->fails()){
-            return response()->json($validator->messages())->setStatusCode(422);
+            return response()->json($validator->messages(), 422);
         }
 
         //Inputan yang benar
@@ -51,7 +51,7 @@ class LayananController extends Controller
             'unit' => $validated['unit']
         ]);
 
-        return response()->json('Data Layanan Berhasil Ditambahkan.')->setStatusCode(201);
+        return response()->json('Data Layanan Berhasil Ditambahkan.', 201);
 
     }
 
@@ -67,7 +67,7 @@ class LayananController extends Controller
 
         // Jika inputan salah
         if($validator->fails()){
-            return response()->json($validator->messages())->setStatusCode(422);
+            return response()->json($validator->messages(), 422);
         }
 
         $validated = $validator->validated();
@@ -85,21 +85,19 @@ class LayananController extends Controller
                     'unit' => $validated['unit']
                 ]);
     
-            return response()->json(['messages' => 'Data Layanan Berhasil Diupdate.'])->setStatusCode(201);
+            return response()->json(['messages' => 'Data Layanan Berhasil Diupdate.'], 201);
         }
-        return response()->json(['messages' => 'Data Layanan Tidak Ditemukan.'])->setStatusCode(404);
+        return response()->json(['messages' => 'Data Layanan Tidak Ditemukan.'], 404);
     }
     
     // Mengapus data berdasarkan id
-    public function delete($id)
-    {
+    public function delete($id){
         $layanan = Layanan::find($id);
 
         if (!$layanan) {
             return response()->json(['message' => 'Data Layanan Tidak Ditemukan.'], 404);
         }
 
-        // Panggil method delete() yang sudah memiliki event deleting() di model Layanan
         $layanan->delete();
 
         return response()->json(['message' => 'Data Layanan Berhasil Dihapus.'], 200);
