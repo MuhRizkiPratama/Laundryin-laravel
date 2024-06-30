@@ -164,7 +164,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nama\": \"Rizki\",\r\n    \"no_hp\": \"123456789111\",\r\n    \"alamat\": \"Cikampek\",\r\n    \"id_layanan\": 1,\r\n    \"jumlah\" : 2\r\n}\r\n",
+							"raw": "{\r\n    \"nama\": \"Riza\",\r\n    \"no_hp\": \"122245678111\",\r\n    \"alamat\": \"Wadas\",\r\n    \"id_layanan\": 1,\r\n    \"jumlah\" : 2\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -183,12 +183,146 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Update Status Ke Selesai",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/pesanan/status/22",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"pesanan",
+								"status",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lihat Pesanan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/pesanans",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"pesanans"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "Laporan",
 			"item": [
+				{
+					"name": "Tambah Laporan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tanggal\": \"2024-06-23\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/laporan/tanggal",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"laporan",
+								"tanggal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lihat Laporan By Tanggal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tanggal\" : \"2024-06-23\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/laporans/tanggal",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"laporans",
+								"tanggal"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Lihat Laporan",
 					"request": {
@@ -205,13 +339,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/laporan",
+							"raw": "{{baseUrl}}/api/laporans",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
-								"laporan"
+								"laporans"
 							]
 						}
 					},
