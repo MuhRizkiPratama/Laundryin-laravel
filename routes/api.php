@@ -22,28 +22,26 @@ use App\Http\Controllers\LaporanController;
 //Route Auth
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'registerOwner']);
+Route::get('/oauth/google', [AuthController::class, 'loginWithGoogle']);
 
 Route::middleware(['jwt-auth'])->group(function(){
     //Routes Layanan
-    Route::get('/layanans', [LayananController::class, 'show']);
+    Route::get('/layanan', [LayananController::class, 'show']);
     Route::get('layanans/{id}', [LayananController::class, 'showById']);
     Route::post('/layanan', [LayananController::class, 'create']);
     Route::put('/layanan/{id}', [LayananController::class, 'update']);
     Route::delete('/layanan/{id}', [LayananController::class, 'delete']);
 
     //Routes Pesanan
-    Route::get('/pesanan', [PesananController::class, 'index']);
-    Route::get('/pesanans', [PesananController::class, 'show']);
-    Route::get('/pesanans/{id}', [PesananController::class, 'showById']);
+    Route::get('/pesanan', [PesananController::class, 'show']);
     Route::post('/pesanan', [PesananController::class, 'create']);
-    Route::put('/pesanan/{id}', [PesananController::class, 'update']);
     Route::delete('/pesanan/{id}', [PesananController::class, 'delete']);
     Route::patch('/pesanan/status/{id}', [PesananController::class, 'updateStatus']);
 
     //Routes Laporan
-    Route::get('/laporans', [LaporanController::class, 'show']);
-    Route::post('/laporans/tanggal', [LaporanController::class, 'showByTanggal']);
-    Route::post('/laporan', [LaporanController::class, 'createLaporan']);
+    Route::get('/laporan', [LaporanController::class, 'show']);
+    Route::post('/laporan', [LaporanController::class, 'create']);
+    Route::post('/laporan/tanggal', [LaporanController::class, 'showByTanggal']);
 });
 
 Route::middleware(['jwt-auth', 'role-owner'])->group(function(){

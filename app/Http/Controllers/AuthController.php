@@ -105,4 +105,35 @@ class AuthController extends Controller
         
         return response()->json(['messages' => 'Register Berhasil'], 201);
     }
+
+    // Login With Google
+    public function loginWithGoogle(Request $request){
+        $token = $request->accessToken;
+        $googleUser = Socialite::driver('google')->userFromToken($token);
+        $user = User::where('email', $googleUser->email)->first();
+
+        if ($user) {
+                // Jika pengguna sudah ada, lakukan login
+                $token = auth()->guard('api')->login($user);
+                return response()->json([
+                    "status" => true,
+                    "message" => "Login berhasil dengan Google",
+                    "token" => $token
+                ], 200);
+            } else {
+                // Pengguna belum ada, buat pengguna baru
+                $user = User::create([
+                    'nama' => $googleUser->nama,
+                    'email' => $googleUser->email,
+                    'password' => bcrypt('123456dummy')
+                ]);
+
+                $token = auth()->guard('api')->login($user);
+                return response()->json([
+                    "status" => true,
+                    "message" => "Pendaftaran berhasil dengan Google",
+                    "token" => $token
+                ], 200);
+            }
+    }
 }

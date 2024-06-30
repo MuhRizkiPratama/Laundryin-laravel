@@ -12,27 +12,10 @@ use Carbon\Carbon;
 class PesananController extends Controller
 {   
     // Menampilkan semua data pesanan dengan relasi pelanggan dan layanan
-    public function index()
-    {
+    public function show(){
         $pesanan = Pesanan::with(['pelanggan', 'layanan'])->get();
 
         return response()->json($pesanan);
-    }
-
-    // Melihat data pesanan
-    public function show(){
-        $pesanan = Pesanan::all();
-
-        return response()->json($pesanan, 200);
-    }
-
-    // Menampilkan data pesanan by id
-    public function showById($id){
-        $pesanan = Pesanan::find($id);
-        if (!$pesanan) {
-            return response()->json(['message' => 'Pesanan tidak ditemukan'], 404);
-        }
-        return response()->json($pesanan, 200);
     }
     
     // Membuat data pesanan
@@ -81,6 +64,19 @@ class PesananController extends Controller
         ]);
 
         return response()->json(['message' => 'Pesanan berhasil dibuat', 'pesanan' => $pesanan], 201);
+    }
+
+    // Mengapus data pesanan berdasarkan id
+    public function delete($id){
+        $pesanan = Pesanan::find($id);
+
+        if (!$pesanan) {
+            return response()->json(['message' => 'Data Pesanan Tidak Ditemukan.'], 404);
+        }
+
+        $pesanan->delete();
+
+        return response()->json(['message' => 'Data Pesanan Berhasil Dihapus.'], 200);
     }
 
     // Mengubah Status dari Proses ke Selesai

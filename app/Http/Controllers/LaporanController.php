@@ -12,14 +12,15 @@ class LaporanController extends Controller{
     // Menampilkan semua data laporan
     public function show(){
         $laporan = Laporan::all();
+        
         if($laporan){
             return response()->json($laporan, 200);
         }
-    return response()->json(['messages' => 'Laporan Tidak ditemukan.'], 401);
+        return response()->json(['messages' => 'Laporan Tidak ditemukan.'], 401);
     }
 
     // Membuat data laporan
-    public function createLaporan(Request $request){
+    public function create(Request $request){
         $tanggal = $request->input('tanggal'); 
 
         // Hitung jumlah pesanan

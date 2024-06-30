@@ -18,6 +18,7 @@ class LayananController extends Controller
     // Menampilkan data layanan by id
     public function showById($id){
         $layanan = Layanan::find($id);
+        
         if (!$layanan) {
             return response()->json(['message' => 'Layanan tidak ditemukan'], 404);
         }
