@@ -27,6 +27,11 @@ class User extends Authenticatable
         'role'
     ];
 
+    // Filter user berdasarkan role
+    public static function getByRole($role){
+        return self::where('role', $role)->get();
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

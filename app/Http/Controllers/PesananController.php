@@ -17,6 +17,22 @@ class PesananController extends Controller
 
         return response()->json($pesanan);
     }
+
+    // Menampilkan by status selesai
+    public function showSelesai(){
+        // Mengambil data pesanan dengan relasi pelanggan dan layanan yang statusnya 'selesai'
+        $pesanan = Pesanan::with(['pelanggan', 'layanan'])->where('status', 'selesai')->get();
+    
+        return response()->json($pesanan);
+    }
+
+    // Menampilkan by status proses
+    public function showProses(){
+        // Mengambil data pesanan dengan relasi pelanggan dan layanan yang statusnya 'proses'
+        $pesanan = Pesanan::with(['pelanggan', 'layanan'])->where('status', 'proses')->get();
+    
+        return response()->json($pesanan);
+    }    
     
     // Membuat data pesanan
     public function create(Request $request){

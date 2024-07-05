@@ -58,7 +58,7 @@ class AuthController extends Controller
     // Register Account Karyawan
     public function register (request $request){
         $validator = Validator::make($request->all(), [
-            'nama' => 'required|string',
+            'nama' => 'required|string|max:100',
             'email' => 'required|email',
             'password' => 'required'
         ]);
@@ -77,13 +77,13 @@ class AuthController extends Controller
             'password' => Hash::make($validated['password'])
         ]);
         
-        return response()->json(['messages' => 'Register Berhasil'], 201);
+        return response()->json(['messages' => 'Account karyawan berhasil dibuat.'], 201);
     }
 
     // Register Account Owner
     public function registerOwner (request $request){
         $validator = Validator::make($request->all(), [
-            'nama' => 'required|string',
+            'nama' => 'required|string|max:100',
             'email' => 'required|email',
             'password' => 'required'
         ]);
@@ -106,34 +106,65 @@ class AuthController extends Controller
         return response()->json(['messages' => 'Register Berhasil'], 201);
     }
 
-    // Login With Google
-    public function loginWithGoogle(Request $request){
-        $token = $request->accessToken;
-        $googleUser = Socialite::driver('google')->userFromToken($token);
-        $user = User::where('email', $googleUser->email)->first();
-
-        if ($user) {
-                // Jika pengguna sudah ada, lakukan login
-                $token = auth()->guard('api')->login($user);
-                return response()->json([
-                    "status" => true,
-                    "message" => "Login berhasil dengan Google",
-                    "token" => $token
-                ], 200);
-            } else {
-                // Pengguna belum ada, buat pengguna baru
-                $user = User::create([
-                    'nama' => $googleUser->nama,
-                    'email' => $googleUser->email,
-                    'password' => bcrypt('123456dummy')
+    // Mengupdate data user by id
+    public function update(request $request, $id){
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|string|max:100',
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+    
+        // Jika inputan salah
+        if($validator->fails()){
+            return response()->json($validator->messages(), 422);
+        }
+    
+        $validated = $validator->validated();
+    
+        // Jika data user berdasarkan id ditemukan
+        $checkData = User::find($id);
+    
+        if($checkData){
+            User::where('id', $id)
+                ->update([
+                    'nama' => $validated['nama'],
+                    'email' => $validated['email'],
+                    'password' => Hash::make($validated['password'])
                 ]);
+    
+            return response()->json(['messages' => 'Data User Berhasil Diupdate.'], 201);
+        }
+        return response()->json(['messages' => 'Data User Tidak Ditemukan.'], 404);
+    }
 
-                $token = auth()->guard('api')->login($user);
-                return response()->json([
-                    "status" => true,
-                    "message" => "Pendaftaran berhasil dengan Google",
-                    "token" => $token
-                ], 200);
-            }
+    //Menghapus user berdasarkan id
+    public function delete($id){
+        $user = User::find($id);
+
+        if(!$user){
+            return response()->json(['messages' => 'User tidak ditemukan.'], 404);
+        }
+
+        $user->delete();
+
+        return response()->json(['messages' => 'User berhasil dihapus.']);
+    }
+
+    //Menampilkan user berdasarkan role kasir
+    public function showByRole(){
+        $user = User::getByRole('kasir');
+
+        return response()->json($user, 200);
+    }
+
+    // Menampilkan user berdasarkan id dan role kasir
+    public function showById($id){
+        $user = User::where('id', $id)->where('role', 'kasir')->first();
+    
+        if (!$user) {
+            return response()->json(['message' => 'User tidak ditemukan atau user bukan seorang kasir.'], 404);
+        }
+    
+        return response()->json($user, 200);
     }
 }
