@@ -1,0 +1,618 @@
+{
+	"info": {
+		"_postman_id": "c669bd49-b29d-488d-a3a5-8351ebe63e55",
+		"name": "LaundryIn",
+		"description": "Collection API LaundryIn Apps",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33437404"
+	},
+	"item": [
+		{
+			"name": "Layanan",
+			"item": [
+				{
+					"name": "Lihat Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/layanan",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"layanan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tambah Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama\" : \"Laundry Satuan (Bantal)\",\r\n    \"harga\" : 10000,\r\n    \"deskripsi\" : \"Layanan Laundry Bantal\",\r\n    \"durasi\" : \"40\",\r\n    \"unit\" : \"pcs\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/layanan",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"layanan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ubah Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama\" : \"Laundry Satuan (Guling)\",\r\n    \"harga\" : 12000,\r\n    \"deskripsi\" : \"Layanan laundry Guling\",\r\n    \"durasi\" : 40,\r\n    \"unit\" : \"pcs\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/layanan/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"layanan",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hapus Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/layanan/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"layanan",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pesanan",
+			"item": [
+				{
+					"name": "Lihat Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/pesanan",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"pesanan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tambah Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama\": \"Rizki\",\r\n    \"no_hp\": \"122245678123\",\r\n    \"alamat\": \"Jatisari\",\r\n    \"id_layanan\": 2,\r\n    \"jumlah\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/pesanan",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"pesanan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hapus Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/pesanan/23",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"pesanan",
+								"23"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/pesanan/status/22",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"pesanan",
+								"status",
+								"22"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Laporan",
+			"item": [
+				{
+					"name": "Lihat Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/laporan",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"laporan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tambah Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tanggal\" : \"2024-06-30\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/laporan",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"laporan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lihat Data By Tanggal",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tanggal\" : \"2024-06-30\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/laporan/tanggal",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"laporan",
+								"tanggal"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Karyawan",
+			"item": [
+				{
+					"name": "Lihat Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/karyawan",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"karyawan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tambah Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama\" : \"ilham\",\r\n    \"email\" : \"ilham@gmail.com\",\r\n    \"password\" : \"ilham\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/karyawan",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"karyawan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hapus Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/karyawan/4",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"karyawan",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ubah Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtOwner}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama\" : \"apis\",\r\n    \"email\" : \"apis@gmail.com\",\r\n    \"password\" : \"apis\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/karyawan/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"karyawan",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"owner@gmail.com\",\r\n    \"password\" : \"owner\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nama\" : \"rizz\",\r\n    \"email\" : \"rizz@gmail.com\",\r\n    \"password\" : \"rizz\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/register",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://laundryin.gens.social",
+			"type": "string"
+		},
+		{
+			"key": "jwtOwner",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "jwtKasir",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
